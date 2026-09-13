@@ -1,0 +1,64 @@
+{
+  "name": "codeoverview",
+  "displayName": "Code Overview",
+  "publisher": "longyuan-dev",
+  "description": "A structured code preview tool.",
+  "icon": "media/extension.png",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/image-gif/code_overview_extension.git"
+  },
+  "keywords": ["code", "codemap", "overview"],
+  "engines": {
+    "vscode": "^1.137.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "secondarySidebar": [
+        {
+          "id": "codeOverview",
+          "title": "Code Overview",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "codeOverview": [
+        {
+          "id": "codeOverview",
+          "name": "Code Overview",
+          "icon": "media/icon.svg",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.137.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,38 @@
+.code-overview-module-item_title {
+  padding: 2px 2px 2px 0.5em;
+  font-weight: 500;
+}
+
+.code-overview-module-item_title-icon {
+  margin-right: 0.5em;
+  transition: transform 0.3s ease;
+}
+
+.code-overview-module-item_title-icon-close {
+  transform: rotate(-90deg);
+}
+
+.code-overview-module-item_children {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.code-overview-module-item_children-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.code-overview-module-item_children-close {
+  grid-template-rows: 0fr;
+}
+
+.code-overview-module-item_children-item {
+  padding: 2px 2px 2px 2em;
+}
+
+
+
+.code-overview-module-item_children-item-label:hover {
+  background: var(--vscode-list-hoverBackground);
+}

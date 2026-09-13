@@ -1,0 +1,14 @@
+{
+  "name": "code-overview",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "watch": "pnpm run -F codeoverview watch",
+    "build": "pnpm run -F ui build && pnpm run -F codeoverview compile",
+    "build:ui": "pnpm run -F ui build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.32.1"
+}
