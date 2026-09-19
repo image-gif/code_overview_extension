@@ -1,4 +1,11 @@
 import { render } from 'preact'
 import { App } from './app.tsx'
+import { VScodeWrapper } from './context.tsx'
 
-render(<App />, document.getElementById('app')!)
+render(
+  (
+    <VScodeWrapper>
+      <App />
+    </VScodeWrapper>
+  ),
+  document.getElementById('app')!);

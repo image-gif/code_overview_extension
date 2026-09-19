@@ -35,9 +35,14 @@ export class CodeOverviewProvider implements vscode.WebviewViewProvider {
   private view?: vscode.WebviewView;
 
   constructor(private readonly extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
+
+    let debounceTimer: NodeJS.Timeout;
     context.subscriptions.push(
       vscode.window.onDidChangeActiveTextEditor(() => {
-        this.sendSymbols();
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+        debounceTimer = setTimeout(() => this.sendSymbols(), 50);
       }),
 
       vscode.workspace.onDidSaveTextDocument((doc) => {
@@ -65,11 +70,11 @@ export class CodeOverviewProvider implements vscode.WebviewViewProvider {
   private generateStructData(symbols: DocumentSymbolType[]): StructData[] {
     const moduleMap: Map<string, StructData> = new Map();
     const languange = vscode.window.activeTextEditor?.document.languageId;
-    
+
     if (!languange) {
       return [];
     }
-    
+
     const languageHandler = getLanguageHandler(languange);
 
     for (const symbol of symbols) {
@@ -176,12 +181,10 @@ export class CodeOverviewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = await this.getHtml(webviewView.webview);
 
-    this.sendSymbols();
-
     // 接收 Webview 消息
     webviewView.webview.onDidReceiveMessage(async (message) => {
       if (message.command === 'requestSymbols') {
-        // this.sendSymbols();
+        this.sendSymbols();
       } else if (message.command === 'gotoTarget') {
         await this.gotoTarget(message.location);
       }

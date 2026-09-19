@@ -3,21 +3,19 @@ import type { StructItem, SymbolItem } from "../../types";
 import ArrowIcon from "../Icon/arrow";
 import "./index.css";
 import Modules from "../Modules";
+import { useVscodeContext } from "../../context";
 
-declare global {
-  const acquireVsCodeApi: () => {
-    postMessage: (...args: any[]) => void
-  }
-}
+
 
 type ModuleItemProps = {
   data: SymbolItem;
 }
 
-const vscode = acquireVsCodeApi();
+
 
 export default function ModuleItem({ data }: ModuleItemProps) {
   const [expand, setExpand] = useState(true);
+  const vscode = useVscodeContext();
 
   const handleClick = (child: StructItem) => {
     vscode.postMessage({ command: 'gotoTarget', location: child.location });
